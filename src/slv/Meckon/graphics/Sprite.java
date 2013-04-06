@@ -6,7 +6,8 @@ public class Sprite {
 	private int x,y;
 	public int[] pixels;
 	private SpriteSheet sheet;
-	public static Sprite player = new Sprite(8,0,0,SpriteSheet.players);
+	public static Sprite player1 = new Sprite(8,0,0,SpriteSheet.players);
+	public static Sprite player2 = new Sprite(8,1,0,SpriteSheet.players);
 	public static Sprite surface = new Sprite(8,0,0,SpriteSheet.tiles);
 	
 	public Sprite(int size,int x,int y,SpriteSheet sheet){

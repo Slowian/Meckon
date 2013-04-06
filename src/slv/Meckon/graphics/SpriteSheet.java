@@ -13,7 +13,7 @@ public class SpriteSheet {
 	
 	public static SpriteSheet players = new SpriteSheet("/players/spritesheet.png",64);
 	public static SpriteSheet tiles = new SpriteSheet("/textures/spritesheet.png",64);
-	
+	public static SpriteSheet arenas = new SpriteSheet("/arenas/spritesheet.png",64);
 	public SpriteSheet(String path,int size){
 		this.path = path;
 		this.SIZE = size;

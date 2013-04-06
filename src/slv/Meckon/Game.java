@@ -11,13 +11,14 @@ import javax.swing.JFrame;
 
 import slv.Meckon.graphics.Screen;
 import slv.Meckon.input.Keyboard;
+import slv.Meckon.objects.Arena;
 import slv.Meckon.objects.Player;
 
 public class Game extends Canvas implements Runnable{
 	private static final long serialVersionUID = 1L;
 
-	public static int width = 1920/6;
-	public static int height = width/16*9;
+	public static int width = 1920/6;//320
+	public static int height = width/16*9;//180
 	public static int scale = 3;
 	public static String title = "Meckon";
 	
@@ -30,7 +31,8 @@ public class Game extends Canvas implements Runnable{
 	private BufferedImage image = new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
 	private int[] pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
 	
-	private Player player1;
+	private Player player1,player2;
+	private Arena arena;
 	
 	public Game(){
 		Dimension size = new Dimension(width*scale,height*scale);
@@ -39,7 +41,9 @@ public class Game extends Canvas implements Runnable{
 		screen = new Screen(width,height);
 		frame = new JFrame();
 		key = new Keyboard();
-		player1 = new Player(width/2-4,height/2-4);
+		player1 = new Player(1,width/2-10,height/2-4);
+		player2 = new Player(2,width/2+2,height/2-4);
+		arena = new Arena(0,height,width/2,height/2);
 		
 		addKeyListener(key);
 	}
@@ -99,6 +103,7 @@ public class Game extends Canvas implements Runnable{
 		if(key.left)x++;
 		if(key.right)x--;
 		player1.update(key,screen);
+		player2.update(key, screen);
 	}
 	
 	public void render(){
@@ -110,7 +115,9 @@ public class Game extends Canvas implements Runnable{
 		}
 		
 		screen.render(x,y);
+		arena.render(screen);
 		player1.render(screen);
+		player2.render(screen);
 		
 		for(int i = 0;i<pixels.length;i++)
 			pixels[i] = screen.pixels[i];

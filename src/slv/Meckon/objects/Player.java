@@ -8,18 +8,23 @@ public class Player {
 	
 	public int x,y;
 	private int speed = 1;
-	public Sprite sprite = Sprite.player;
+	public Sprite sprite;
 	Keyboard previous;
 	int count = 0;
+	int number = 0;
 	
-	public Player(int x,int y){
+	public Player(int number,int x,int y){
 		this.x = x;
 		this.y = y;
+		this.number = number;
+		if(number == 1)this.sprite =Sprite.player1;
+		if(number == 2)this.sprite =Sprite.player2;
 	}
 	
 	public void update(Keyboard key,Screen screen){
 		if(previous == null)previous = key;
-		if(previous.down||previous.up||previous.left||previous.right)
+		if((number == 2 &&(previous.down||previous.up||previous.left||previous.right))||
+				(number == 1&&(previous.w||previous.s||previous.a||previous.d)))
 		{
 			count++;
 			if(speed<3&&count>3)
@@ -36,10 +41,10 @@ public class Player {
 				count = 0;
 			}
 		}
-		if(key.up)y-=speed;
-		if(key.down)y+=speed;
-		if(key.left)x-=speed;
-		if(key.right)x+=speed;
+		if((number == 2&&key.up)||(number == 1&&key.w))y-=speed;
+		if((number == 2&&key.down)||(number == 1&&key.s))y+=speed;
+		if((number == 2&&key.left)||(number == 1&&key.a))x-=speed;
+		if((number == 2&&key.right)||(number == 1&&key.d))x+=speed;
 		if(x<0){
 			x=0;
 			speed = 1;
@@ -56,8 +61,8 @@ public class Player {
 			y=screen.height-sprite.SIZE;
 			speed = 1;
 		}
-		System.out.println("Player x: " + x);
-		System.out.println("Player y: " + y);
+		System.out.println("Player "+number+" x: " + x);
+		System.out.println("Player "+number+" y: " + y);
 		previous = key;
 	}
 	
