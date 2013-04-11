@@ -57,9 +57,9 @@ public class Screen {
 	
 	public void renderArena(Arena arena){
 		for(ArenaItem item: arena.items){
-			for(int y = 0;y<8;y++){
+			for(int y = 0;y<item.size;y++){
 				if(y+item.y<0||y+item.y>=height)continue;
-				for(int x = 0;x<8;x++){
+				for(int x = 0;x<item.size;x++){
 					if(x+item.x<0||x+item.x>=width)continue;
 					pixels[(int)(x+item.x + (y+item.y)*width)] = item.sprite.pixels[(x)+(y)*item.sprite.SIZE];
 				}
